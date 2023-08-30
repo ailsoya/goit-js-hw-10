@@ -3,3 +3,8 @@ img {
     width: 30%;
     height: 30%;
 }
+
+.cat-info {
+    display: flex;
+    flex-direction: row;
+}

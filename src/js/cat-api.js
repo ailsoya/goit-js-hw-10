@@ -1,6 +1,6 @@
 import axios from "axios"
-const selector = document.querySelector('.breed-select')
 const infoblock = document.querySelector('.cat-info')
+const selector = document.querySelector('.breed-select')
 
 function fetchBreeds() {
     const BASE_URL = 'https://api.thecatapi.com/v1/breeds'
@@ -24,14 +24,14 @@ function fetchCatByBreed(breedId) {
     return axios
         .get(fullURL)
         .then(function (response) {
-            const markup = `<img src="${response.url}">
-                            <h2>${response[0].breeds[0].name}</h2>`
+            const markup = `<img src="${response.data[0].url}">
+                            <div class="text-part"><h2>${response.data[0].breeds[0].name}</h2>
+                            <p>${response.data[0].breeds[0].description}</p>
+                            <span><b>Temperament: </b>${response.data[0].breeds[0].temperament}</span></div>`
             infoblock.innerHTML = markup
+            console.log(response.data[0].breeds[0])
         })
         .catch(err => console.log(err))
 }
 
-fetchBreeds()
-selector.addEventListener('change', function() {
-    fetchCatByBreed(this.value)
-})
+export { fetchBreeds, fetchCatByBreed }

@@ -31,6 +31,7 @@ function fetchBreeds() {
 
 function fetchCatByBreed(breedId) {
     let fullURL = `https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`
+    infoblock.style.display = 'none'
     loader.style.display = 'block'
     
     return axios
@@ -42,10 +43,12 @@ function fetchCatByBreed(breedId) {
                             <span class="temp"><b>Temperament: </b>${response.data[0].breeds[0].temperament}</span></div>`
             infoblock.innerHTML = markup
             loader.style.display = 'none'
+            infoblock.style.display = 'flex'
         })
         .catch((err) => {
             Notiflix.Notify.failure(`Oops! Something went wrong! Try reloading the page!`)
             loader.style.display = 'none'
+            infoblock.style.display = 'flex'
         })
 }
 
